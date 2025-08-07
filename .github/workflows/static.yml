@@ -1,0 +1,438 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        <!DOCTYPE html>
+<!-- saved from url=(0078)file:///Users/ambriza/Documents/CLASSROOM%20ESSETIALS/Daily%20Joke%20Dice.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Joke Dice - Morning Meeting Fun</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        .dice-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .dice {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(145deg, #ff6b6b, #ee5a24);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(238, 90, 36, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dice:hover {
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 15px 35px rgba(238, 90, 36, 0.4);
+        }
+
+        .dice.rolling {
+            animation: rollDice 1s ease-in-out;
+        }
+
+        @keyframes rollDice {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            75% { transform: rotate(270deg) scale(1.1); }
+        }
+
+        .joke-display {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .joke-text {
+            font-size: 1.3em;
+            color: #2d3748;
+            line-height: 1.5;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .roll-button {
+            background: linear-gradient(145deg, #48bb78, #38a169);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(72, 187, 120, 0.3);
+            font-family: inherit;
+            font-weight: bold;
+        }
+
+        .roll-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(72, 187, 120, 0.4);
+        }
+
+        .roll-button:active {
+            transform: translateY(0);
+        }
+
+        .daily-info {
+            background: rgba(116, 75, 162, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #553c9a;
+            font-weight: bold;
+        }
+
+        .sparkle {
+            display: inline-block;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .dice {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5em;
+            }
+            
+            .joke-text {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class="sparkle">🎲</span> Daily Joke Dice <span class="sparkle">😄</span></h1>
+        <p class="subtitle">Roll for a smile to start your day!</p>
+        
+        <div class="daily-info" id="dateInfo">
+            Today is: <span id="currentDate">Thursday, August 7, 2025</span>
+        </div>
+
+        <div class="dice-container">
+            <div class="dice" id="dice" onclick="rollDice()">
+                🎯
+            </div>
+        </div>
+
+        <div class="joke-display">
+            <p class="joke-text" id="jokeText">Click the dice to roll for today's joke!</p>
+        </div>
+
+        <button class="roll-button" onclick="rollDice()">
+            🎲 Roll for a Joke! 🎲
+        </button>
+    </div>
+
+    <script>
+        // Extensive collection of school-appropriate jokes
+        const jokes = [
+            "Why don't scientists trust atoms? Because they make up everything!",
+            "What do you call a bear with no teeth? A gummy bear!",
+            "Why don't eggs tell jokes? They'd crack each other up!",
+            "What do you call a sleeping bull? A bulldozer!",
+            "Why did the math book look so sad? Because it had too many problems!",
+            "What do you call a dinosaur that crashes his car? Tyrannosaurus Wrecks!",
+            "Why don't skeletons fight each other? They don't have the guts!",
+            "What do you call a fish wearing a crown? A king fish!",
+            "Why did the banana go to the doctor? It wasn't peeling well!",
+            "What do you call a cow with no legs? Ground beef!",
+            "Why don't teddy bears ever eat dessert? Because they're always stuffed!",
+            "What do you call a pig that does karate? A pork chop!",
+            "Why did the cookie go to the doctor? Because it felt crumbly!",
+            "What do you call a sheep with no legs? A cloud!",
+            "Why don't pencils ever get tired? They have plenty of lead!",
+            "What do you call a dog magician? A labracadabrador!",
+            "Why did the student eat his homework? Because the teacher told him it was a piece of cake!",
+            "What do you call a belt made of watches? A waist of time!",
+            "Why don't mountains ever get cold? They wear snow caps!",
+            "What do you call a cat that works for the Red Cross? A first-aid kit!",
+            "Why did the scarecrow win an award? He was outstanding in his field!",
+            "What do you call a really funny mountain? Hill-arious!",
+            "Why don't books ever get cold? They have book jackets!",
+            "What do you call a duck that gets all A's? A wise quacker!",
+            "Why did the bicycle fall over? It was two-tired!",
+            "What do you call a sleeping bull at school? A bulldozer in detention!",
+            "Why don't crayons ever argue? They always find common ground!",
+            "What do you call a pencil with two erasers? Pointless!",
+            "Why did the computer go to the eye doctor? It had a virus!",
+            "What do you call a snowman with a six-pack? An abdominal snowman!",
+            "Why don't calendars ever get stressed? They take it one day at a time!",
+            "What do you call a turtle that flies planes? A pilot turtle!",
+            "Why did the music teacher need a ladder? To reach the high notes!",
+            "What do you call a bee that's having a bad hair day? A frisbee!",
+            "Why don't rivers ever get lost? They always follow their banks!",
+            "What do you call a duck that loves making jokes? A wise-quacker!",
+            "Why did the banana split? Because it saw the ice cream!",
+            "What do you call a fish that needs help with vocals? Auto-tuna!",
+            "Why don't clocks ever go to therapy? They have too much time on their hands!",
+            "What do you call a bear that's stuck in the rain? A drizzly bear!",
+            "Why did the orange stop rolling down the hill? It ran out of juice!",
+            "What do you call a rabbit that's good at karate? A kung-fu bunny!",
+            "Why don't shoes ever get tired of walking? They're sole survivors!",
+            "What do you call a elephant that doesn't matter? An irr-elephant!",
+            "Why did the cookie cry? Because its mom was a wafer so long!",
+            "What do you call a dinosaur that loves to sleep? A dino-snore!",
+            "Why don't trees ever get speeding tickets? They stick to the root speed limit!",
+            "What do you call a superhero that skips school? The Absent-Minded Professor!",
+            "Why did the grape stop in the middle of the road? Because it ran out of juice!",
+            "What do you call a pig that knows martial arts? A karate chop!",
+            "Why don't spiders ever pay for internet? They're always on the web!",
+            "What do you call a sleeping dinosaur? A dino-snore!",
+            "Why did the tissue dance? It was feeling a little light-headed!",
+            "What do you call a cow that plays music? A moo-sician!",
+            "Why don't eggs ever win races? They always crack under pressure!",
+            "What do you call a dog that can do magic? A labracadabrador!",
+            "Why did the student take a ladder to school? Because they wanted to go to high school!",
+            "What do you call a fish with no eyes? Fsh!",
+            "Why don't vegetables ever start fights? They prefer peas!",
+            "What do you call a sleeping cat? A cat-nap!",
+            "Why did the clock go to the principal's office? For tocking too much!",
+            "What do you call a bunch of disorganized cats? A cat-astrophe!",
+            "Why don't books ever get hungry? They're full of stories!",
+            "What do you call a chicken that tells jokes? A comedi-hen!",
+            "Why did the eraser go to school? To correct its mistakes!",
+            "What do you call a duck that loves jokes? A quack-up!",
+            "Why don't cars ever get tired? They have spare tires!",
+            "What do you call a bear with no ears? B!",
+            "Why did the pencil sharpener break up with the pencil? It was tired of going around in circles!",
+            "What do you call a cat that works at a hospital? A first-aid kitten!",
+            "Why don't flowers ever get speeding tickets? They always stop and smell the roses!",
+            "What do you call a pig that does comedy? A ham!",
+            "Why did the ruler go to the doctor? It had too many inches!",
+            "What do you call a dog that loves bath time? A shampoo-dle!",
+            "Why don't pillows ever get in trouble? They're always well-rested!",
+            "What do you call a cow with a sense of humor? Laughing stock!",
+            "Why did the backpack go to school early? It didn't want to be a late bag!",
+            "What do you call a fish that wears a crown? Your Royal High-ness!",
+            "Why don't shoes ever feel sad? They always have each other!",
+            "What do you call a dinosaur that's really good at word games? A thesaurus!",
+            "Why did the crayon break up with the paper? It felt like it was being used!",
+            "What do you call a monkey that loves chips? A chipmunk!",
+            "Why don't stars ever get lost? They always follow the North Star!",
+            "What do you call a cat that loves to bowl? An alley cat!",
+            "Why did the glue stick to everything? It had attachment issues!",
+            "What do you call a duck that's really funny? A real quack-up!",
+            "Why don't clouds ever feel down? They're always looking up!",
+            "What do you call a fish that's great at basketball? A slam-dunk-fish!",
+            "Why did the notebook go to the gym? To work on its lines!",
+            "What do you call a cow that can play music? A moo-sic maker!",
+            "Why don't butterflies ever get speeding tickets? They always flutter by!",
+            "What do you call a dog that loves to paint? Pablo Pic-passo!",
+            "Why did the calculator feel smart? It could always count on itself!",
+            "What do you call a pig that knows karate? A pork-chop!",
+            "Why don't rainbows ever feel colorless? They're always bright!",
+            "What do you call a cat that loves math? A cal-cu-later!",
+            "Why did the scissors feel sharp? They always made the cut!",
+            "What do you call a bear that loves honey? Pooh Bear!",
+            "Why don't erasers ever make permanent mistakes? They always give second chances!",
+            "What do you call a duck that's good at fixing things? A handy-duck!",
+            "Why did the marker feel colorful? It always made its mark!",
+            "What do you call a fish that's really organized? A file-fish!",
+            "Why don't staplers ever feel disconnected? They always bring things together!",
+            "What do you call a cow that loves to dance? A moo-ver and shaker!",
+            "Why did the whiteboard feel clear? It always had a clean slate!",
+            "What do you call a dog that loves science? A lab-rador!",
+            "Why don't paper clips ever feel bent out of shape? They're flexible!",
+            "What do you call a cat that loves to read? A book-worm cat!",
+            "Why did the folder feel organized? It always kept things together!",
+            "What do you call a pig that loves art? Pig-casso!",
+            "Why don't highlighters ever feel dull? They always shine bright!",
+            "What do you call a duck that's really smart? A brain-duck!",
+            "Why did the tape feel sticky? It always stuck to its goals!",
+            "What do you call a bear that loves school? A study buddy bear!",
+            "Why don't crayons ever feel broken? They always stick together!"
+        ];
+
+        let currentJokeIndex = -1;
+        let isRolling = false;
+
+        function getDayOfYear() {
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start;
+            const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+            return dayOfYear;
+        }
+
+        function getDailyJoke() {
+            // Use day of year as seed for consistent daily joke
+            const dayOfYear = getDayOfYear();
+            return jokes[dayOfYear % jokes.length];
+        }
+
+        function getRandomJoke() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * jokes.length);
+            } while (newIndex === currentJokeIndex && jokes.length > 1);
+            currentJokeIndex = newIndex;
+            return jokes[newIndex];
+        }
+
+        function displayDate() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        function rollDice() {
+            if (isRolling) return;
+            
+            isRolling = true;
+            const dice = document.getElementById('dice');
+            const jokeText = document.getElementById('jokeText');
+            
+            // Add rolling animation
+            dice.classList.add('rolling');
+            
+            // Show rolling text
+            jokeText.textContent = "Rolling for your joke... 🎲";
+            
+            // Simulate dice roll with random faces
+            const diceSymbols = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+            let rollCount = 0;
+            const rollInterval = setInterval(() => {
+                dice.textContent = diceSymbols[Math.floor(Math.random() * 6)];
+                rollCount++;
+                if (rollCount >= 10) {
+                    clearInterval(rollInterval);
+                    
+                    // Final dice face
+                    dice.textContent = '🎯';
+                    dice.classList.remove('rolling');
+                    
+                    // Get and display joke
+                    const joke = getRandomJoke();
+                    jokeText.textContent = joke;
+                    
+                    isRolling = false;
+                }
+            }, 100);
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            displayDate();
+            
+            // Optionally show today's consistent joke on first load
+            // document.getElementById('jokeText').textContent = getDailyJoke();
+        };
+
+        // Update date every minute in case page is left open
+        setInterval(displayDate, 60000);
+    </script>
+
+</body></html>
